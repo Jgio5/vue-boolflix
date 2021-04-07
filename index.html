@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <title>Boolflix</title>
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <div class="search">
+                    <button @click="searchFilmApi()" id="btn-search"><i class="fas fa-search"></i></button>
+                    <input v-model="searchFilm" @keyup.enter="searchFilmApi()" id ="search-title" type="text" placeholder="Inserisci un titolo">
+                </div>
+            </div>
+        </header>
+        <!-- /Header -->
+
+        <!-- Main -->
+        <main>
+            <div class="container">
+                <div class="container_box">
+                    <div v-for="movie in searchMoviesResults" class="box_film">
+                        <h1 class="title_film"> {{ movie.title}} </h1>
+                        <h2 class="title_original_film"> {{ movie.original_title }}</h2>
+                        <p class="lenguage_film"> {{ movie.original_language }}</p>
+                        <p class="vote_film"> Voto: {{ movie.popularity }}</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- /Main -->
+    </div>
+    <!-- Sezione JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>
