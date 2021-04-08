@@ -64,3 +64,8 @@ main {
     margin: 5px;
     border: 1px solid white;
 }
+
+.box_film .lenguage_flag {
+    height: 30px;
+    width: 50px;
+}

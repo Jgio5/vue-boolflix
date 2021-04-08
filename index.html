@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- VueJS -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- Axios -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <title>Boolflix</title>
 </head>
@@ -16,8 +20,8 @@
         <header>
             <div class="container">
                 <div class="search">
-                    <button @click="searchFilmApi()" id="btn-search"><i class="fas fa-search"></i></button>
-                    <input v-model="searchFilm" @keyup.enter="searchFilmApi()" id ="search-title" type="text" placeholder="Inserisci un titolo">
+                    <button @click="search()" id="btn-search"><i class="fas fa-search"></i></button>
+                    <input v-model="searchWord" @keyup.enter="search()" id ="search-title" type="text" placeholder="Inserisci un titolo">
                 </div>
             </div>
         </header>
@@ -27,11 +31,18 @@
         <main>
             <div class="container">
                 <div class="container_box">
-                    <div v-for="movie in searchMoviesResults" class="box_film">
-                        <h1 class="title_film"> {{ movie.title}} </h1>
-                        <h2 class="title_original_film"> {{ movie.original_title }}</h2>
-                        <p class="lenguage_film"> {{ movie.original_language }}</p>
-                        <p class="vote_film"> Voto: {{ movie.popularity }}</p>
+                    <div v-for="result in searchResults" class="box_film">
+
+                        <h1 v-if="result.title || result.name"> {{ result.title || result.name }} </h1>
+                        <h2 v-if="result.original_title || result.original_name"> {{ result.original_title || result.original_name}}</h2>
+                            
+                        <img v-if="availableFlags.includes(result.original_language)" class="lenguage_flag":src="setLenguageFlag(result.original_language)">
+                        <p v-else> Lingua: {{ result.original_language }} </p>
+
+                        <div class="vote">
+                            <i v-for="i in getVote(result.vote_average)" class="fas fa-star"></i>
+                            <i v-for="i in (5 - getVote(result.vote_average))" class="far fa-star"></i>
+                        </div>
                     </div>
                 </div>
             </div>
