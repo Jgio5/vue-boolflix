@@ -19,10 +19,17 @@
         <!-- Header -->
         <header>
             <div class="container">
-                <div class="search">
-                    <button @click="search()" id="btn-search"><i class="fas fa-search"></i></button>
-                    <input v-model="searchWord" @keyup.enter="search()" id ="search-title" type="text" placeholder="Inserisci un titolo">
+                <!-- Header Nav -->
+                <div class="nav">
+                    <div class="logo">
+                        <img src="img/boolflix.png" alt="Logo boolflix">
+                    </div>
+                    <div class="search">
+                        <button @click="search()" id="btn-search"><i class="fas fa-search"></i></button>
+                        <input v-model="searchWord" @keyup.enter="search()" id ="search-title" type="text" placeholder="Inserisci un titolo">
+                    </div>
                 </div>
+                <!-- /Header Nav -->
             </div>
         </header>
         <!-- /Header -->
@@ -33,21 +40,31 @@
                 <div class="container_box">
                     <div v-for="result in searchResults" class="box_film">
 
-                        <div class="poster">
-                            <img v-if="result.poster_path" :src="getPoster(result.poster_path)" alt="">
-                            <img v-else src="https://www.repstatic.it/content/nazionale/img/2019/09/25/150311411-5a979a61-dfa8-4ddb-be01-da202386d04a.jpg" alt="">
-                        </div>
-
-                        <h1 v-if="result.title || result.name"> {{ result.title || result.name }} </h1>
-                        <h2 v-if="result.original_title || result.original_name"> {{ result.original_title || result.original_name}}</h2>
+                            <img class="poster" v-if="result.poster_path" :src="getPoster(result.poster_path)" alt="">
+                            <img class="poster" v-else src="https://www.repstatic.it/content/nazionale/img/2019/09/25/150311411-5a979a61-dfa8-4ddb-be01-da202386d04a.jpg" alt="">
                             
-                        <img v-if="availableFlags.includes(result.original_language)" class="lenguage_flag":src="setLenguageFlag(result.original_language)">
-                        <p v-else> Lingua: {{ result.original_language }} </p>
-
-                        <div class="vote">
-                            <i v-for="i in getVote(result.vote_average)" class="fas fa-star"></i>
-                            <i v-for="i in (5 - getVote(result.vote_average))" class="far fa-star"></i>
-                        </div>
+                            <div class="hover_info">
+                                <div class="title">
+                                    <p>Title:</p>
+                                    <h1 v-if="result.title || result.name" class="first_name"> {{ result.title || result.name }} </h1>
+                                    <p>Original Title:</p>
+                                    <h2 v-if="result.original_title || result.original_name" class="original_name"> {{ result.original_title || result.original_name}}</h2>
+                                </div>
+                                
+                                <img v-if="availableFlags.includes(result.original_language)" class="lenguage_flag":src="setLenguageFlag(result.original_language)">
+                                <p v-else> Lingua: {{ result.original_language }} </p>
+        
+                                <div class="vote">
+                                    <i v-for="i in getVote(result.vote_average)" class="fas fa-star"></i>
+                                    <i v-for="i in (5 - getVote(result.vote_average))" class="far fa-star"></i>
+                                </div>
+        
+                                <div class="overview">
+                                    <p>Description:</p>
+                                    {{ result.overview }}
+                                </div>
+                            </div>
+                    
                     </div>
                 </div>
             </div>

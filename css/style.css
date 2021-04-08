@@ -16,11 +16,17 @@ body {
 
 /* Header */
 header {
-    display: flex;
-    align-items: center;
     height: 100px;
     width: 100%;
     background-color: black;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 .search {
@@ -55,27 +61,82 @@ main {
 }
 
 .box_film {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 250px;
-    height: 300px;
-    padding: 5px;
+    width: 300px;
+    height: 400px;
     margin: 5px;
-    border: 1px solid white;
 }
 
 .box_film .poster {
-    height: 100px;
-    width: 70px;
-}
-.box_film .poster img {
+    z-index: 3;
+    position:absolute;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
 }
-
-
-.box_film .lenguage_flag {
-    height: 30px;
-    width: 50px;
+.box_film .poster:hover {
+    z-index: 1;
+    display: none;
 }
+
+.hover_info {
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+
+
+.box_film .hover_info .first_name,
+.box_film .hover_info .original_name {
+    font-size: 20px;
+}
+
+.box_film .hover_info .lenguage_flag {
+    height: 20px;
+    width: 30px;
+    margin: 3px 0;
+}
+
+.box_film .hover_info .vote {
+    margin: 5px 0;
+    color: gold;
+}
+
+.box_film .hover_info .overview p {
+    font-weight: bold;
+}
+.box_film .hover_info .overview {
+    width: 100%;
+    height: 100px;
+    overflow-y: auto;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(151, 35, 35, 0.65); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+  }

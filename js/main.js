@@ -19,6 +19,10 @@
 // Milestone 3:
 // In questa milestone come prima cosa aggiungiamo la copertina del film o della serie al nostro elenco. 
 
+// Milestone 4:
+// Trasformiamo quello che abbiamo fatto fino ad ora in una vera e propria webapp, creando un layout completo simil-Netflix:
+
+
 
 Vue.config.devtools = true
 
