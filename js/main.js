@@ -39,15 +39,23 @@ var app = new Vue({
         search() {
             axios.get('https://api.themoviedb.org/3/search/multi' ,
                     {   params: {
-                        api_key: this.myApiKey,
-                        query: this.searchWord,
-                        language: 'it-IT'
+                            api_key: this.myApiKey,
+                            query: this.searchWord,
+                            language: 'it_IT'
                         }
                     })
+                
+                /*mi da errore con alcune parole*/
+                // .then((result) => {
+                //     this.searchResults = result.data.results;
+                // })
                 .then((result) => {
-                    this.searchResults = result.data.results;
-                });
+                    this.searchResults = result.data.results.filter((person) => {
+                        return person.media_type != 'person'
+                    });
+                })
 
+            console.log(this.searchResults);
             this.searchWord = '';
         },
         //Stelle e punteggi
@@ -59,5 +67,9 @@ var app = new Vue({
             this.flag = true;
             return "img/" + language + ".png";
           },
+        //Inserire immagine
+        getPoster(poster) {
+            return `https://image.tmdb.org/t/p/w185/${poster}`;
+        }
     }
 })

@@ -33,6 +33,11 @@
                 <div class="container_box">
                     <div v-for="result in searchResults" class="box_film">
 
+                        <div class="poster">
+                            <img v-if="result.poster_path" :src="getPoster(result.poster_path)" alt="">
+                            <img v-else src="https://www.repstatic.it/content/nazionale/img/2019/09/25/150311411-5a979a61-dfa8-4ddb-be01-da202386d04a.jpg" alt="">
+                        </div>
+
                         <h1 v-if="result.title || result.name"> {{ result.title || result.name }} </h1>
                         <h2 v-if="result.original_title || result.original_name"> {{ result.original_title || result.original_name}}</h2>
                             
